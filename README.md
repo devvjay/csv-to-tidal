@@ -2,7 +2,8 @@
 I, created this project for personal use so that i could transfer .csv(s) i got from spotify using Exportify to Tidal.  
 Any future contributions are Welcome
 
-# Exportify
+# Exportify  
+it is a tool which i used to dump the playlist data into .csv
 it can be found at 
 https://exportify.app/  
 
