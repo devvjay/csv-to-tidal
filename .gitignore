@@ -1,0 +1,5 @@
+tidal_token.json
+reports/
+csv-files-go-here/
+__pycache__/
+.venv/
