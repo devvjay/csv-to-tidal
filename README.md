@@ -1,67 +1,112 @@
-# csv-to-tidal
-I, created this project for personal use so that i could transfer .csv(s) i got from spotify using Exportify to Tidal.  
-Any future contributions are Welcome
+# CSV to TIDAL
 
-# Exportify  
-it is a tool which i used to dump the playlist data into .csv
-it can be found at 
-https://exportify.app/  
+A Python tool to import Spotify playlist CSV files into TIDAL playlists.
 
-https://github.com/watsonbox/exportify  
-
-Props to him as well.
-
-
-          
-# CSV to Tidal Playlist Converter
-
-A Python tool that converts CSV playlist files into Tidal playlists.
+I created this project for personal use to transfer playlists exported from Spotify using [Exportify](https://exportify.app/) to TIDAL.
 
 ## Features
-- OAuth-based Tidal authentication with session persistence
-- Smart song matching algorithm
-- Support for multiple CSV files
-- Progress tracking and detailed feedback
 
-## Prerequisites
-- Python 3.x
-- Tidal account
-- CSV files with playlists
+* 🔐 TIDAL OAuth login with session persistence
+* 🎵 Smart track and artist matching
+* 📊 Confidence scoring to reduce incorrect matches
+* 📁 Supports multiple CSV files
+* 🔄 Retries temporary TIDAL/API errors
+* 🧹 Prevents duplicate tracks
+* 📈 Shows import statistics
+* 📄 Generates CSV reports for unmatched and failed tracks
+* 🔤 Supports common CSV encodings and column names
+
+## Requirements
+
+* Python 3.x
+* A TIDAL account
+* Spotify playlist CSV files exported using Exportify
+* Internet connection
 
 ## Installation
+
 ```bash
-git clone https://github.com/devvjay/csv-to-tidal
-cd csv-tidal
-pip install tidalapi pandas
+git clone https://github.com/devvjay/csv-to-tidal.git
+cd csv-to-tidal
+python -m pip install tidalapi pandas
 ```
 
-## CSV Format
-Place your files in `csv-files-go-here` directory:
-```csv
-Track Name,Artist Name(s)
-"Die For You","The Weeknd"
-```
-i have provided a sample .csv for the format
+## Usage
 
-## Usage  
-1. Create a folder named `csv-files-go-here`
-2. Place CSV files in `csv-files-go-here`
-3. Run:
+1. Put your CSV files inside:
+
+```text
+csv-files-go-here/
+```
+
+2. Run:
+
 ```bash
 python main.py
 ```
-4. First time: Follow OAuth link to authorize
-5. Select CSV and enter playlist name
-6. Wait for completion
+
+3. Authenticate with TIDAL on the first run.
+4. Select your CSV playlist.
+5. Enter a playlist name and confirm the import.
+
+The program searches TIDAL, matches tracks using title and artist similarity, and only adds matches above the confidence threshold.
+
+## Import Reports
+
+After an import, a report is automatically saved in:
+
+```text
+reports/
+```
+
+The report contains tracks that were not found, had low confidence, failed to add, or encountered an error.
+
+## CSV Format
+
+Example:
+
+```csv
+Track Name,Artist Name(s)
+"Die For You","The Weeknd"
+"Blinding Lights","The Weeknd"
+```
+
+The importer automatically detects common track and artist column names.
+
+## Exportify
+
+CSV files can be exported from [Exportify](https://exportify.app/).
+
+GitHub repository: [watsonbox/exportify](https://github.com/watsonbox/exportify)
+
+Props to the creator of Exportify!
 
 ## Troubleshooting
-- Authentication: Delete `tidal_token.json` to re-authenticate
-- Check CSV format and encoding (UTF-8)
-- Review console for unmatched songs
+
+If TIDAL authentication stops working, delete:
+
+```text
+tidal_token.json
+```
+
+and run the program again.
+
+For login issues, update `tidalapi`:
+
+```bash
+python -m pip install --upgrade tidalapi
+```
 
 ## License
+
 MIT License
 
 ## Acknowledgments
-- [tidalapi](https://github.com/tamland/python-tidal)
-- [pandas](https://pandas.pydata.org/)        
+
+* [tidalapi](https://github.com/tamland/python-tidal)
+* [pandas](https://pandas.pydata.org/)
+* [Exportify](https://exportify.app/)
+
+## Disclaimer
+
+This project is not affiliated with or endorsed by Spotify or TIDAL.
